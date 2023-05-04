@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Страница с линиями и таблицей</title>
+	<style>
+		/* Стили для линий */
+		.line {
+			height: 1px;
+			background-color: black;
+			margin: 10px 0;
+		}
+
+		/* Стили для таблицы */
+		table {
+			border-collapse: collapse;
+			margin: auto;
+			width: 50%;
+		}
+
+		table td, table th {
+			border: 1px solid black;
+			padding: 10px;
+			margin:  50px;
+			text-align: center;
+		}
+
+		table th {
+			background-color: lightgray;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		let n = prompt("Введите число n (2 < n < 15)");
+
+		// Проверяем, что n входит в заданный диапазон
+		if (n < 3 || n > 14) {
+			alert("Вы ввели некорректное число!");
+		}
+		else{
+			// Создаем линии до таблицы
+			for (let i = n; i >= 1; i--) {
+				let lineWidth = i * 100/n;
+				document.write(`<div class="line" style="width:${lineWidth}%"></div>`);
+			}
+
+
+			document.write(`<table>`);
+			let count = 0;
+			for (let i = 1; i <= n; i++){
+				document.write(`<tr>`);
+				for (let j = 1; j <= n; j++){
+					// document.write(`<td> </td>`);
+					// console.log(Math.round(n / 2));
+					let middle_J = Number(Math.round(n / 2));
+					let middle_I = Number(Math.round(n / 2));
+					if (n % 2 == 0){
+						if ((j > middle_J && i > middle_I) || ((j > middle_J) && (j <= n - i + 1)) || (i > middle_I && i <= n - j + 1)){
+							count = Number(count + 1);
+							document.write(`<th></th>`);							
+						}
+						else{
+							document.write(`<td></td>`);
+						}
+					}
+					else{
+						let saveN = Number(n);
+						// (Отрисовкка) Нижний квадрат
+						if ((j > middle_J && i > middle_I) || ((j >= middle_J) && (j <= n - i + 1)) || (i >= middle_I && i <= n - j + 1)){
+							count = Number(count + 1);
+							document.write(`<th></th>`);
+
+						}
+						else{
+							document.write(`<td></td>`);
+						}
+					}
+
+				}
+				document.write(`</tr>`);
+			}
+
+			document.write(`</table>`);
+
+			// Создаем линии после таблицы
+			for (let i = 1; i <= n; i++) {
+				let lineWidth = i * 100/n;
+				document.write(`<div class="line" style="width:${lineWidth}%"></div>`);
+			}
+		}
+	</script>
+</body>
+</html>
